@@ -1,0 +1,22 @@
+version: '2'
+services:
+    discovery:
+        container_name: discovery
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: discoveryserver:latest
+        expose:
+            - 8761
+        ports:
+            - 8761:8761
+            
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge
+volumes:
+    spring-cloud-config-repo:
+        external: true
+            
