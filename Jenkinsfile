@@ -35,6 +35,14 @@ pipeline{
               //  sh 'docker push dockerlearing/discoveryserver:0.0.1'
             }
          }
+	stage('Remove Previous Container'){
+	    try{
+		    sh "docker rm -f discoveryserver"
+	
+    	}catch(error){
+		//  do nothing if there is an exception
+	    }
+    	}
           stage('Deploy-Dev'){
               steps{
                 sh "docker run -d -p 8761:8761 --name discoveryserver dockerlearing/discoveryserver:0.0.1"
